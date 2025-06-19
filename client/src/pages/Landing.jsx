@@ -62,9 +62,9 @@ export default function Landing() {
                 </a>
               </Link>
               {!isAuthenticated && (
-                <Link href="/register">
+                <Link href="/login">
                   <a className="bg-white hover:bg-slate-50 text-slate-700 px-8 py-4 rounded-xl text-lg font-semibold border border-slate-200 transition-colors">
-                    Get Started Free
+                    Sign In
                   </a>
                 </Link>
               )}
