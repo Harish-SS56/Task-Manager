@@ -1,13 +1,9 @@
 import * as React from "react"
 import { OTPInput, OTPInputContext } from "input-otp"
 import { Dot } from "lucide-react"
-
 import { cn } from "@/lib/utils"
-
-const InputOTP = React.forwardRef<
-  ,
-  
->(({ className, containerClassName, ...props }, ref) => (
+const InputOTP = React.forwardRef(
+({ className, containerClassName, ...props }, ref) => (
   <OTPInput
     ref={ref}
     containerClassName={cn(
@@ -19,22 +15,16 @@ const InputOTP = React.forwardRef<
   />
 ))
 InputOTP.displayName = "InputOTP"
-
-const InputOTPGroup = React.forwardRef<
-  ,
-  
->(({ className, ...props }, ref) => (
+const InputOTPGroup = React.forwardRef(
+({ className, ...props }, ref) => (
   <div ref={ref} className={cn("flex items-center", className)} {...props} />
 ))
 InputOTPGroup.displayName = "InputOTPGroup"
-
-const InputOTPSlot = React.forwardRef<
-  ,
+const InputOTPSlot = React.forwardRef(
    & { index: number }
->(({ index, className, ...props }, ref) => {
+({ index, className, ...props }, ref) => {
   const inputOTPContext = React.useContext(OTPInputContext)
   const { char, hasFakeCaret, isActive } = inputOTPContext.slots[index]
-
   return (
     <div
       ref={ref}
@@ -44,7 +34,6 @@ const InputOTPSlot = React.forwardRef<
         className
       )}
       {...props}
-    >
       {char}
       {hasFakeCaret && (
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
@@ -55,15 +44,11 @@ const InputOTPSlot = React.forwardRef<
   )
 })
 InputOTPSlot.displayName = "InputOTPSlot"
-
-const InputOTPSeparator = React.forwardRef<
-  ,
-  
->(({ ...props }, ref) => (
+const InputOTPSeparator = React.forwardRef(
+({ ...props }, ref) => (
   <div ref={ref} role="separator" {...props}>
     <Dot />
   </div>
 ))
 InputOTPSeparator.displayName = "InputOTPSeparator"
-
 export { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator }

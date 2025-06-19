@@ -2,13 +2,9 @@ import * as React from "react"
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu"
 import { cva } from "class-variance-authority"
 import { ChevronDown } from "lucide-react"
-
 import { cn } from "@/lib/utils"
-
-const NavigationMenu = React.forwardRef<
-  ,
-  
->(({ className, children, ...props }, ref) => (
+const NavigationMenu = React.forwardRef(
+({ className, children, ...props }, ref) => (
   <NavigationMenuPrimitive.Root
     ref={ref}
     className={cn(
@@ -16,17 +12,13 @@ const NavigationMenu = React.forwardRef<
       className
     )}
     {...props}
-  >
     {children}
     <NavigationMenuViewport />
   </NavigationMenuPrimitive.Root>
 ))
 NavigationMenu.displayName = NavigationMenuPrimitive.Root.displayName
-
-const NavigationMenuList = React.forwardRef<
-  ,
-  
->(({ className, ...props }, ref) => (
+const NavigationMenuList = React.forwardRef(
+({ className, ...props }, ref) => (
   <NavigationMenuPrimitive.List
     ref={ref}
     className={cn(
@@ -37,22 +29,16 @@ const NavigationMenuList = React.forwardRef<
   />
 ))
 NavigationMenuList.displayName = NavigationMenuPrimitive.List.displayName
-
 const NavigationMenuItem = NavigationMenuPrimitive.Item
-
 const navigationMenuTriggerStyle = cva(
   "group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[state=open]:text-accent-foreground data-[state=open]:bg-accent/50 data-[state=open]:hover:bg-accent data-[state=open]:focus:bg-accent"
 )
-
-const NavigationMenuTrigger = React.forwardRef<
-  ,
-  
->(({ className, children, ...props }, ref) => (
+const NavigationMenuTrigger = React.forwardRef(
+({ className, children, ...props }, ref) => (
   <NavigationMenuPrimitive.Trigger
     ref={ref}
     className={cn(navigationMenuTriggerStyle(), "group", className)}
     {...props}
-  >
     {children}{" "}
     <ChevronDown
       className="relative top-[1px] ml-1 h-3 w-3 transition duration-200 group-data-[state=open]:rotate-180"
@@ -61,11 +47,8 @@ const NavigationMenuTrigger = React.forwardRef<
   </NavigationMenuPrimitive.Trigger>
 ))
 NavigationMenuTrigger.displayName = NavigationMenuPrimitive.Trigger.displayName
-
-const NavigationMenuContent = React.forwardRef<
-  ,
-  
->(({ className, ...props }, ref) => (
+const NavigationMenuContent = React.forwardRef(
+({ className, ...props }, ref) => (
   <NavigationMenuPrimitive.Content
     ref={ref}
     className={cn(
@@ -76,13 +59,9 @@ const NavigationMenuContent = React.forwardRef<
   />
 ))
 NavigationMenuContent.displayName = NavigationMenuPrimitive.Content.displayName
-
 const NavigationMenuLink = NavigationMenuPrimitive.Link
-
-const NavigationMenuViewport = React.forwardRef<
-  ,
-  
->(({ className, ...props }, ref) => (
+const NavigationMenuViewport = React.forwardRef(
+({ className, ...props }, ref) => (
   <div className={cn("absolute left-0 top-full flex justify-center")}>
     <NavigationMenuPrimitive.Viewport
       className={cn(
@@ -96,11 +75,8 @@ const NavigationMenuViewport = React.forwardRef<
 ))
 NavigationMenuViewport.displayName =
   NavigationMenuPrimitive.Viewport.displayName
-
-const NavigationMenuIndicator = React.forwardRef<
-  ,
-  
->(({ className, ...props }, ref) => (
+const NavigationMenuIndicator = React.forwardRef(
+({ className, ...props }, ref) => (
   <NavigationMenuPrimitive.Indicator
     ref={ref}
     className={cn(
@@ -108,13 +84,11 @@ const NavigationMenuIndicator = React.forwardRef<
       className
     )}
     {...props}
-  >
     <div className="relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md" />
   </NavigationMenuPrimitive.Indicator>
 ))
 NavigationMenuIndicator.displayName =
   NavigationMenuPrimitive.Indicator.displayName
-
 export {
   navigationMenuTriggerStyle,
   NavigationMenu,

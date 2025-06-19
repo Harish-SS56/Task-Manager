@@ -16,22 +16,16 @@ export default function Landing() {
             </div>
             <div className="flex space-x-4">
               {isAuthenticated ? (
-                <Link href="/dashboard">
-                  <a className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                    Dashboard
-                  </a>
+                <Link href="/dashboard" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                  Dashboard
                 </Link>
               ) : (
                 <>
-                  <Link href="/login">
-                    <a className="text-slate-600 hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                      Login
-                    </a>
+                  <Link href="/login" className="text-slate-600 hover:text-slate-900 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                    Login
                   </Link>
-                  <Link href="/register">
-                    <a className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-                      Sign Up
-                    </a>
+                  <Link href="/register" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                    Sign Up
                   </Link>
                 </>
               )}
@@ -55,17 +49,13 @@ export default function Landing() {
               Simple, powerful task management that helps you stay focused and get things done. Track progress, set priorities, and achieve your goals.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href={isAuthenticated ? "/dashboard" : "/register"}>
-                <a className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all transform hover:scale-105 shadow-lg">
-                  <i className="fas fa-rocket mr-2"></i>
-                  {isAuthenticated ? "Go to Dashboard" : "Get Started Free"}
-                </a>
+              <Link href={isAuthenticated ? "/dashboard" : "/register"} className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all transform hover:scale-105 shadow-lg">
+                <i className="fas fa-rocket mr-2"></i>
+                {isAuthenticated ? "Go to Dashboard" : "Get Started Free"}
               </Link>
               {!isAuthenticated && (
-                <Link href="/login">
-                  <a className="bg-white hover:bg-slate-50 text-slate-700 px-8 py-4 rounded-xl text-lg font-semibold border border-slate-200 transition-colors">
-                    Sign In
-                  </a>
+                <Link href="/login" className="bg-white hover:bg-slate-50 text-slate-700 px-8 py-4 rounded-xl text-lg font-semibold border border-slate-200 transition-colors">
+                  Sign In
                 </Link>
               )}
             </div>
