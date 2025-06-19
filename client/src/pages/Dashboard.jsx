@@ -207,8 +207,7 @@ export default function Dashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <i className="fas fa-tasks text-blue-500 text-2xl mr-3"></i>
-              <h1 className="text-xl font-bold text-slate-800">TaskFlow</h1>
+              <h1 className="text-xl font-bold text-slate-800">Taskmanager-PremacAI</h1>
             </div>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-slate-600">{user?.email}</span>
@@ -258,7 +257,7 @@ export default function Dashboard() {
           <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
             <div className="flex items-center">
               <div className="bg-amber-100 p-3 rounded-lg">
-                <i className="fas fa-clock text-amber-600 text-xl"></i>
+              <i className="fas fa-clock text-amber-600 text-xl"></i>
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-slate-600">Pending</p>
@@ -266,17 +265,7 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-200">
-            <div className="flex items-center">
-              <div className="bg-purple-100 p-3 rounded-lg">
-                <i className="fas fa-percentage text-purple-600 text-xl"></i>
-              </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-slate-600">Progress</p>
-                <p className="text-2xl font-bold text-slate-900">{progressPercentage}%</p>
-              </div>
-            </div>
-          </div>
+         
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -326,7 +315,6 @@ export default function Dashboard() {
                   disabled={pendingTasks === 0}
                   className="w-full text-left px-4 py-3 rounded-lg hover:bg-slate-50 transition-colors border border-slate-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <i className="fas fa-check-double text-emerald-500 mr-3"></i>
                   <span className="text-slate-700">Mark all as complete</span>
                 </button>
                 <button
@@ -334,17 +322,9 @@ export default function Dashboard() {
                   disabled={completedTasks === 0}
                   className="w-full text-left px-4 py-3 rounded-lg hover:bg-slate-50 transition-colors border border-slate-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <i className="fas fa-broom text-amber-500 mr-3"></i>
                   <span className="text-slate-700">Clear completed</span>
                 </button>
-                <button
-                  onClick={handleExportTasks}
-                  disabled={totalTasks === 0}
-                  className="w-full text-left px-4 py-3 rounded-lg hover:bg-slate-50 transition-colors border border-slate-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <i className="fas fa-download text-blue-500 mr-3"></i>
-                  <span className="text-slate-700">Export tasks</span>
-                </button>
+                
               </div>
             </div>
           </div>

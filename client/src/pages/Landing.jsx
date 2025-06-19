@@ -11,8 +11,7 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <i className="fas fa-tasks text-blue-500 text-2xl mr-3"></i>
-              <h1 className="text-xl font-bold text-slate-800">TaskFlow</h1>
+              <h1 className="text-xl font-bold text-slate-800">Taskmanager-PremacAI</h1>
             </div>
             <div className="flex space-x-4">
               {isAuthenticated ? (
@@ -38,11 +37,9 @@ export default function Landing() {
       <div className="bg-gradient-to-br from-blue-50 to-slate-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="mb-8">
-              <i className="fas fa-clipboard-check text-6xl text-blue-500 mb-6"></i>
-            </div>
+
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
-              Organize Your Tasks,<br/>
+              Task manager,<br/>
               <span className="text-blue-500">Boost Your Productivity</span>
             </h1>
             <p className="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
@@ -50,7 +47,6 @@ export default function Landing() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href={isAuthenticated ? "/dashboard" : "/register"} className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all transform hover:scale-105 shadow-lg">
-                <i className="fas fa-rocket mr-2"></i>
                 {isAuthenticated ? "Go to Dashboard" : "Get Started Free"}
               </Link>
               {!isAuthenticated && (

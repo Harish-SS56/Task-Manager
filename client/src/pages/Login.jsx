@@ -69,8 +69,7 @@ export default function Login() {
               </a>
             </Link>
             <div className="flex items-center">
-              <i className="fas fa-tasks text-blue-500 text-2xl mr-3"></i>
-              <h1 className="text-xl font-bold text-slate-800">TaskFlow</h1>
+              <h1 className="text-xl font-bold text-slate-800">Taskmanager-PremacAI</h1>
             </div>
             <div></div>
           </div>

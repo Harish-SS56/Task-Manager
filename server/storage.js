@@ -1,16 +1,22 @@
+// server/storage.js
+
+import dotenv from 'dotenv';
+dotenv.config(); // ✅ Load .env variables before anything else
+
 import mongoose from 'mongoose';
 import bcryptjs from 'bcryptjs';
 
-// MongoDB connection
-const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://hk6113367:e5MCNR4JtF9JZdfr@taskmanager.nstysiz.mongodb.net/taskmanager?retryWrites=true&w=majority&appName=Taskmanager";
+// ✅ Load MONGO_URI from environment
+const MONGO_URI = process.env.MONGO_URI;
+if (!MONGO_URI) throw new Error("Missing MONGO_URI in environment variables.");
 
-// User Schema
+// 🔐 User Schema
 const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true }
 }, { timestamps: true });
 
-// Task Schema
+// ✅ Task Schema
 const taskSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   title: { type: String, required: true },
@@ -18,32 +24,22 @@ const taskSchema = new mongoose.Schema({
   completed: { type: Boolean, default: false }
 }, { timestamps: true });
 
+// Models
 const UserModel = mongoose.model('User', userSchema);
 const TaskModel = mongoose.model('Task', taskSchema);
 
-// Storage interface for type documentation
-// Methods:
-// createUser(user) -> User
-// getUserByEmail(email) -> User | null  
-// getUserById(id) -> User | null
-// getTasks(userId) -> Task[]
-// createTask(task) -> Task
-// updateTask(id, updates) -> Task | null
-// deleteTask(id) -> boolean
-// toggleTaskCompletion(id) -> Task | null
-
+// 📦 Storage Class
 export class MongoStorage {
   isConnected = false;
 
   async connect() {
     if (this.isConnected) return;
-    
     try {
-      await mongoose.connect(MONGO_URI);
-      console.log('MongoDB Connected');
+      await mongoose.connect(MONGO_URI, { dbName: "taskmanager" }); // optional: force db name
+      console.log('✅ MongoDB Connected');
       this.isConnected = true;
     } catch (error) {
-      console.error('MongoDB connection error:', error);
+      console.error('❌ MongoDB connection error:', error);
       throw error;
     }
   }
@@ -56,58 +52,53 @@ export class MongoStorage {
       password: hashedPassword
     });
     const savedUser = await user.save();
-    const userObj = savedUser.toObject();
-    userObj._id = userObj._id.toString();
-    return userObj;
+    return { ...savedUser.toObject(), _id: savedUser._id.toString() };
   }
 
   async getUserByEmail(email) {
     await this.connect();
     const user = await UserModel.findOne({ email });
     if (!user) return null;
-    const userObj = user.toObject();
-    userObj._id = userObj._id.toString();
-    return userObj;
+    return { ...user.toObject(), _id: user._id.toString() };
   }
 
   async getUserById(id) {
     await this.connect();
     const user = await UserModel.findById(id);
     if (!user) return null;
-    const userObj = user.toObject();
-    userObj._id = userObj._id.toString();
-    return userObj;
+    return { ...user.toObject(), _id: user._id.toString() };
   }
 
   async getTasks(userId) {
     await this.connect();
     const tasks = await TaskModel.find({ userId }).sort({ createdAt: -1 });
-    return tasks.map(task => {
-      const taskObj = task.toObject();
-      taskObj._id = taskObj._id.toString();
-      taskObj.userId = taskObj.userId.toString();
-      return taskObj;
-    });
+    return tasks.map(task => ({
+      ...task.toObject(),
+      _id: task._id.toString(),
+      userId: task.userId.toString()
+    }));
   }
 
   async createTask(taskData) {
     await this.connect();
     const task = new TaskModel(taskData);
     const savedTask = await task.save();
-    const taskObj = savedTask.toObject();
-    taskObj._id = taskObj._id.toString();
-    taskObj.userId = taskObj.userId.toString();
-    return taskObj;
+    return {
+      ...savedTask.toObject(),
+      _id: savedTask._id.toString(),
+      userId: savedTask.userId.toString()
+    };
   }
 
   async updateTask(id, updates) {
     await this.connect();
     const task = await TaskModel.findByIdAndUpdate(id, updates, { new: true });
     if (!task) return null;
-    const taskObj = task.toObject();
-    taskObj._id = taskObj._id.toString();
-    taskObj.userId = taskObj.userId.toString();
-    return taskObj;
+    return {
+      ...task.toObject(),
+      _id: task._id.toString(),
+      userId: task.userId.toString()
+    };
   }
 
   async deleteTask(id) {
@@ -120,13 +111,14 @@ export class MongoStorage {
     await this.connect();
     const task = await TaskModel.findById(id);
     if (!task) return null;
-    
+
     task.completed = !task.completed;
     const savedTask = await task.save();
-    const taskObj = savedTask.toObject();
-    taskObj._id = taskObj._id.toString();
-    taskObj.userId = taskObj.userId.toString();
-    return taskObj;
+    return {
+      ...savedTask.toObject(),
+      _id: savedTask._id.toString(),
+      userId: savedTask.userId.toString()
+    };
   }
 }
 
