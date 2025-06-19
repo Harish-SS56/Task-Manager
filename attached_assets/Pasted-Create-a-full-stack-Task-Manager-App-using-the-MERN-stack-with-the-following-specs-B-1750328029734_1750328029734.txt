@@ -1,0 +1,82 @@
+Create a full-stack "Task Manager App" using the MERN stack with the following specs:
+
+---
+
+🔧 BACKEND (Node.js + Express):
+
+1. Create a Node.js + Express server.
+2. Connect it to this MongoDB Atlas URL:
+   MONGO_URI=mongodb+srv://hk6113367:e5MCNR4JtF9JZdfr@taskmanager.nstysiz.mongodb.net/taskmanager?retryWrites=true&w=majority&appName=Taskmanager
+
+3. Use these technologies:
+   - Mongoose
+   - bcryptjs for password hashing
+   - jsonwebtoken for JWT-based authentication
+   - dotenv, cors, express
+
+4. Define two MongoDB models:
+   - User: { email, password }
+   - Task: { userId (ref to User), title, description, completed }
+
+5. Implement these RESTful API endpoints:
+
+🧑‍💻 Authentication:
+- POST /api/register → Register a new user
+- POST /api/login → Login and return JWT
+
+🗂️ Task Management (Protected by JWT middleware):
+- GET /api/tasks → Get tasks of logged-in user
+- POST /api/tasks → Add task
+- PUT /api/tasks/:id → Edit task
+- DELETE /api/tasks/:id → Delete task
+- PATCH /api/tasks/:id/toggle → Toggle task completion
+
+6. Create middleware for verifying JWT on protected routes.
+
+7. Server should run on PORT=5000 and return "MongoDB Connected" if successful.
+
+---
+
+🎨 FRONTEND (React + Tailwind CSS):
+
+1. Use `React`, `React Router`, and `Axios`.
+
+2. Pages:
+   - **Landing Page**: Welcome message and "Go to Dashboard" button.
+   - **Register Page**: Email + Password input with basic validation.
+   - **Login Page**: Email + Password input with basic validation.
+   - **Dashboard Page (Protected)**:
+     - Show list of tasks with title, description, status
+     - Add Task (form)
+     - Edit Task
+     - Delete Task
+     - Toggle completion
+
+3. Auth Flow:
+   - Use JWT token stored in localStorage
+   - Use React Context (or Redux) for global auth state
+   - Redirect unauthorized users to login page
+
+4. Styling: Use **Tailwind CSS** or basic CSS (keep clean and minimal).
+
+---
+
+📦 Folder Structure Suggestion:
+
+**Backend**
+- models/User.js, Task.js
+- routes/auth.js, tasks.js
+- middleware/authMiddleware.js
+- server.js
+- .env
+
+**Frontend**
+- src/pages/Login.jsx, Register.jsx, Dashboard.jsx, Landing.jsx
+- src/components/TaskCard.jsx, TaskForm.jsx
+- src/context/AuthContext.jsx
+- src/App.jsx, index.jsx
+- tailwind.config.js
+
+---
+
+📄 .env (backend):
